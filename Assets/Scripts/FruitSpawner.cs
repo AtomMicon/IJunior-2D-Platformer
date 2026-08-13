@@ -1,0 +1,40 @@
+using System.Collections;
+using UnityEngine;
+
+public class FruitSpawner : MonoBehaviour
+{
+    [SerializeField] private GameObject[] _fruitPrefabs;
+    [SerializeField] private float _respawnTime = 3f;
+
+    private GameObject _currentFruit;
+    private bool _isRespawning;
+
+    private void Start()
+    {
+        SpawnFruit();
+    }
+
+    private void Update()
+    {
+        if (_currentFruit == null && !_isRespawning)
+        {
+            StartCoroutine(RespawnRoutine());
+        }
+    }
+
+    private IEnumerator RespawnRoutine()
+    {
+        _isRespawning = true;
+        yield return new WaitForSeconds(_respawnTime);
+        SpawnFruit();
+        _isRespawning = false;
+    }
+
+    private void SpawnFruit()
+    {
+        if (_fruitPrefabs.Length == 0) return;
+
+        int randomIndex = Random.Range(0, _fruitPrefabs.Length);
+        _currentFruit = Instantiate(_fruitPrefabs[randomIndex], transform.position, Quaternion.identity);
+    }
+}
