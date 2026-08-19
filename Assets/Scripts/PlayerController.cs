@@ -52,13 +52,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(_rb.linearVelocity.y) < 0.001f)
         {
-            Jump();
+            _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
         }
-    }
-
-    private void Jump()
-    {
-        _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
     }
 
     private void FastFallCheck()
@@ -74,9 +69,7 @@ public class PlayerController : MonoBehaviour
         _animator.SetFloat("speed", Mathf.Abs(_moveInput));
 
         bool isGrounded = Mathf.Abs(_rb.linearVelocity.y) < 0.001f;
-        _animator.SetBool("isGrounded", isGrounded);
 
-        // НОВОЕ: Передаем скорость полета в Аниматор (положительная - летим вверх, отрицательная - падаем)
         _animator.SetFloat("velocityY", _rb.linearVelocity.y);
     }
 }

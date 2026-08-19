@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6098059384071942776}
   - component: {fileID: 2750103420998914462}
   - component: {fileID: 8182706384616830945}
+  - component: {fileID: 3271113968831402801}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -208,3 +209,20 @@ MonoBehaviour:
   _fastFallSpeed: 15
   _animator: {fileID: 2750103420998914462}
   _spriteRenderer: {fileID: 6098059384071942776}
+--- !u!114 &3271113968831402801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027129471225795367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9957424f0dd1fec4fb829e9962ef0f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _maxHealth: 3
+  _invulnerabilityDuration: 1
+  _blinkInterval: 0.1
+  _knockbackForce: 10
+  _damageSound: {fileID: 8300000, guid: 368891ec34f56504a9ff5fa53b3420d9, type: 3}

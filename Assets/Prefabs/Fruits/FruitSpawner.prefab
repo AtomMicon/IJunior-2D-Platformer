@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2330965004783917585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012762636949469002}
+  - component: {fileID: 6833291405112766477}
+  m_Layer: 0
+  m_Name: FruitSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8012762636949469002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330965004783917585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.72011, y: -2.66828, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6833291405112766477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330965004783917585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98d1886b176fd8f44a28e58a6103a26d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FruitSpawner
+  _fruitPrefabs:
+  - {fileID: 3082496333272499907, guid: fac5e9dcfab7ae04098a1e56e4fc9889, type: 3}
+  - {fileID: 3919669282075312815, guid: 36370cc1482ed884898319aff6bc9b19, type: 3}
+  - {fileID: 2845018643171819276, guid: 66e87b35978594c41ba8ee69d1d03284, type: 3}
+  - {fileID: 6197077913917132449, guid: 7aed0488d917df544aa904bb761ad774, type: 3}
+  - {fileID: 1806191683396597904, guid: 17b74de3ea54e774a8ebc51b018ef53b, type: 3}
+  - {fileID: 3925271606594725759, guid: da385a910c064ca40a86cb9b04d16190, type: 3}
+  - {fileID: 6662807430972419673, guid: 2db959823b266bc46a3b0b132c43788e, type: 3}
+  - {fileID: 4026488704647438688, guid: 961d98634af95fb4584db3b6b695de12, type: 3}
+  _respawnTime: 3
