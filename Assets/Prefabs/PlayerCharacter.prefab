@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2750103420998914462}
   - component: {fileID: 8182706384616830945}
   - component: {fileID: 3271113968831402801}
+  - component: {fileID: 4519718262454415131}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -225,4 +226,17 @@ MonoBehaviour:
   _invulnerabilityDuration: 1
   _blinkInterval: 0.1
   _knockbackForce: 10
-  _damageSound: {fileID: 8300000, guid: 368891ec34f56504a9ff5fa53b3420d9, type: 3}
+  _damageSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
+--- !u!114 &4519718262454415131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027129471225795367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca008d71088c40f41ad81a612cac9174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  _collectSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}

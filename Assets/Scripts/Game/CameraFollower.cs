@@ -14,10 +14,10 @@ public class CameraFollower : MonoBehaviour
         if (_player == null)
             return;
 
-        MoveCamera(CheckDistance());
+        MoveCamera(CalculateCameraMove());
     }
 
-    private float CheckDistance()
+    private float CalculateCameraMove()
     {
         Vector3 currentPos = transform.position;
         float targetX = currentPos.x;

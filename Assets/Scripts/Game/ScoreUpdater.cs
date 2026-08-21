@@ -2,12 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class ScoreUpdater : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static ScoreUpdater Instance { get; private set; }
 
     [SerializeField] private TMP_Text _scoreText;
-    [SerializeField] private PlayerHealth _player;
 
     private int _score;
 
@@ -17,21 +16,7 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void OnEnable()
-    {
-        if (_player != null)
-        {
-            _player.OnDied += RestartLevel;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (_player != null)
-        {
-            _player.OnDied -= RestartLevel;
-        }
-    }
+    
 
     private void Start()
     {
@@ -50,10 +35,5 @@ public class GameManager : MonoBehaviour
         {
             _scoreText.text = _score.ToString();
         }
-    }
-
-    private void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

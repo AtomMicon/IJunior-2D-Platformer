@@ -13,12 +13,12 @@ public class ParallaxLayer
     [HideInInspector] public float length;
 }
 
-public class ParallaxController : MonoBehaviour
+public class Parallax : MonoBehaviour
 {
     public Transform cam;
     public ParallaxLayer[] layers;
 
-    void Start()
+    private void Start()
     {
         if (cam == null) cam = Camera.main.transform;
 
@@ -43,7 +43,7 @@ public class ParallaxController : MonoBehaviour
         }
     }
 
-    void CreateClone(SpriteRenderer originalSr, Transform parent, float worldOffsetX, string cloneName)
+    private void CreateClone(SpriteRenderer originalSr, Transform parent, float worldOffsetX, string cloneName)
     {
         GameObject clone = new GameObject(parent.name + "_" + cloneName);
 
@@ -59,7 +59,7 @@ public class ParallaxController : MonoBehaviour
         cloneSr.material = originalSr.material;
     }
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         foreach (ParallaxLayer layer in layers)
         {
