@@ -2,53 +2,51 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    [SerializeField] private Vector3[] waypoints;
-    [SerializeField] private float speed = 3f;
-    private int currentPointIndex = 0;
+    [SerializeField] private Vector3[] _waypoints;
+    [SerializeField] private float _speed = 3f;
+    private int _currentPointIndex = 0;
 
     private void Start()
     {
-        if (waypoints.Length > 0)
+        if (_waypoints.Length > 0)
         {
-            UpdateFacingDirection(waypoints[0]);
+            UpdateFacingDirection(_waypoints[0]);
         }
     }
 
     private void Update()
     {
-        if (waypoints == null || waypoints.Length == 0)
-        { 
-            return; 
-        }
-        
-        Vector3 target = waypoints[currentPointIndex];
-        
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, target) < 0.1f)
+        if (_waypoints != null && _waypoints.Length != 0)
         {
-            currentPointIndex = (currentPointIndex + 1) % waypoints.Length;
-            UpdateFacingDirection(waypoints[currentPointIndex]);
+            Vector3 target = _waypoints[_currentPointIndex];
+
+            transform.position = Vector2.MoveTowards(transform.position, target, _speed * Time.deltaTime);
+
+            if (Vector2.Distance(transform.position, target) < 0.1f)
+            {
+                _currentPointIndex = (_currentPointIndex + 1) % _waypoints.Length;
+                UpdateFacingDirection(_waypoints[_currentPointIndex]);
+            }
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (waypoints.Length > 0)
+        if (_waypoints.Length > 0)
         {
             Gizmos.color = Color.red;
             
-            for (int i = 0; i < waypoints.Length; i++)
+            for (int i = 0; i < _waypoints.Length; i++)
             {
-                Gizmos.DrawSphere(waypoints[i], 0.1f);
+                Gizmos.DrawSphere(_waypoints[i], 0.1f);
                 
-                if (i < waypoints.Length - 1)
+                if (i < _waypoints.Length - 1)
                 {
-                    Gizmos.DrawLine(waypoints[i], waypoints[i + 1]);
+                    Gizmos.DrawLine(_waypoints[i], _waypoints[i + 1]);
                 }
                 else
                 {
-                    Gizmos.DrawLine(waypoints[i], waypoints[0]);
+                    Gizmos.DrawLine(_waypoints[i], _waypoints[0]);
                 }
             }
         }

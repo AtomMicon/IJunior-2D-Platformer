@@ -14,27 +14,27 @@ public class CameraFollower : MonoBehaviour
         if (_player == null)
             return;
 
-        MoveCamera(CalculateCameraMove());
+        CalculateDistance();
     }
 
-    private float CalculateCameraMove()
+    private void CalculateDistance()
     {
         Vector3 currentPos = transform.position;
-        float targetX = currentPos.x;
         float distanceX = _player.position.x - currentPos.x;
-
+        float moveZone = _deadZone;
+        
         if (Mathf.Abs(distanceX) > _deadZone)
         {
             if (distanceX > 0)
-                targetX = _player.position.x - _deadZone;
-            else
-                targetX = _player.position.x + _deadZone;
-        }
+            {
+                moveZone = -_deadZone;
+            }
 
-        return targetX;
+            Move(_player.position.x + moveZone);
+        }
     }
 
-    private void MoveCamera(float targetX)
+    private void Move(float targetX)
     {
         Vector3 targetPosition = new Vector3(targetX, transform.position.y, transform.position.z);
 

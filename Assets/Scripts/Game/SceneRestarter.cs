@@ -4,13 +4,13 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SceneRestarter : MonoBehaviour
 {
-    [SerializeField] private PlayerHealth _player;
+    [SerializeField] private Health _player;
 
     private void OnEnable()
     {
         if (_player != null)
         {
-            _player.OnDied += RestartLevel;
+            _player.Died += RestartLevel;
         }
     }
 
@@ -18,7 +18,7 @@ public class SceneRestarter : MonoBehaviour
     {
         if (_player != null)
         {
-            _player.OnDied -= RestartLevel;
+            _player.Died -= RestartLevel;
         }
     }
 

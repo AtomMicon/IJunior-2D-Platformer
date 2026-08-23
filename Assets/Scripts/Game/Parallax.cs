@@ -3,85 +3,91 @@ using UnityEngine;
 [System.Serializable]
 public class ParallaxLayer
 {
-    [Tooltip("Объект слоя со спрайтом (достаточно одной картинки)")]
-    public Transform layerTransform;
-
+    public Transform LayerTransform;
+    
     [Tooltip("Дальность (0 - передний план; 1 - стоит на месте)")]
-    public float parallaxFactor;
+    public float ParallaxFactor;
 
-    [HideInInspector] public float startPos;
-    [HideInInspector] public float length;
+    [HideInInspector] public float StartPos;
+    [HideInInspector] public float Length;
 }
 
 public class Parallax : MonoBehaviour
 {
-    public Transform cam;
-    public ParallaxLayer[] layers;
+    [SerializeField] private Transform _camera;
+    [SerializeField] private ParallaxLayer[] _layers;
 
     private void Start()
     {
-        if (cam == null) cam = Camera.main.transform;
-
-        foreach (ParallaxLayer layer in layers)
+        if (_camera == null)
         {
-            if (layer.layerTransform == null) continue;
+            _camera = Camera.main.transform;
+        }
 
-            SpriteRenderer sr = layer.layerTransform.GetComponent<SpriteRenderer>();
-            if (sr != null)
-            {
-                layer.length = sr.bounds.size.x;
+        foreach (ParallaxLayer layer in _layers)
+        {
+            if (layer.LayerTransform != null)
+            { 
+                SpriteRenderer spriteRenderer = layer.LayerTransform.GetComponent<SpriteRenderer>();
                 
-                CreateClone(sr, layer.layerTransform, layer.length, "RightClone");
-                CreateClone(sr, layer.layerTransform, -layer.length, "LeftClone");
-            }
-            else
-            {
-                Debug.LogWarning($"На слое {layer.layerTransform.name} нет SpriteRenderer!");
-            }
+                if (spriteRenderer != null)
+                {
+                    layer.Length = spriteRenderer.bounds.size.x;
+                    
+                    CreateClone(spriteRenderer, layer.LayerTransform, layer.Length, "RightClone");
+                    CreateClone(spriteRenderer, layer.LayerTransform, -layer.Length, "LeftClone");
+                }
+                else
+                {
+                    Debug.LogWarning($"На слое {layer.LayerTransform.name} нет SpriteRenderer!");
+                }
 
-            layer.startPos = layer.layerTransform.position.x;
+                layer.StartPos = layer.LayerTransform.position.x;
+            }
         }
     }
 
-    private void CreateClone(SpriteRenderer originalSr, Transform parent, float worldOffsetX, string cloneName)
+    private void LateUpdate()
+    {
+        foreach (ParallaxLayer layer in _layers)
+        {
+            if (layer.LayerTransform != null)
+            {
+                float temp = _camera.position.x * (1 - layer.ParallaxFactor);
+                float distance = _camera.position.x * layer.ParallaxFactor;
+
+                layer.LayerTransform.position = new Vector3(
+                    layer.StartPos + distance,
+                    layer.LayerTransform.position.y,
+                    layer.LayerTransform.position.z
+                );
+
+                if (temp > layer.StartPos + layer.Length)
+                {
+                    layer.StartPos += layer.Length;
+                }
+                else if (temp < layer.StartPos - layer.Length)
+                {
+                    layer.StartPos -= layer.Length;
+                }
+            }
+        }
+    }
+
+    private void CreateClone(SpriteRenderer originalSpriteRenderer, Transform parent, float worldOffsetX, string cloneName)
     {
         GameObject clone = new GameObject(parent.name + "_" + cloneName);
 
         clone.transform.position = new Vector3(parent.position.x + worldOffsetX, parent.position.y, parent.position.z);
         clone.transform.SetParent(parent, true);
 
-        SpriteRenderer cloneSr = clone.AddComponent<SpriteRenderer>();
-        cloneSr.sprite = originalSr.sprite;
-        cloneSr.color = originalSr.color;
-        cloneSr.sortingLayerID = originalSr.sortingLayerID;
-        cloneSr.sortingOrder = originalSr.sortingOrder;
+        SpriteRenderer cloneSpriteRenderer = clone.AddComponent<SpriteRenderer>();
+        cloneSpriteRenderer.sprite = originalSpriteRenderer.sprite;
+        cloneSpriteRenderer.color = originalSpriteRenderer.color;
+        cloneSpriteRenderer.sortingLayerID = originalSpriteRenderer.sortingLayerID;
+        cloneSpriteRenderer.sortingOrder = originalSpriteRenderer.sortingOrder;
 
-        cloneSr.material = originalSr.material;
+        cloneSpriteRenderer.material = originalSpriteRenderer.material;
     }
 
-    private void LateUpdate()
-    {
-        foreach (ParallaxLayer layer in layers)
-        {
-            if (layer.layerTransform == null) continue;
-
-            float temp = cam.position.x * (1 - layer.parallaxFactor);
-            float dist = cam.position.x * layer.parallaxFactor;
-
-            layer.layerTransform.position = new Vector3(
-                layer.startPos + dist,
-                layer.layerTransform.position.y,
-                layer.layerTransform.position.z
-            );
-
-            if (temp > layer.startPos + layer.length)
-            {
-                layer.startPos += layer.length;
-            }
-            else if (temp < layer.startPos - layer.length)
-            {
-                layer.startPos -= layer.length;
-            }
-        }
-    }
 }

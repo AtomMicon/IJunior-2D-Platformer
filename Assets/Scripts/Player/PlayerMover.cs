@@ -1,22 +1,19 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _fastFallSpeed = 15f;
 
-    [SerializeField] private Animator _animator;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-
-    private Rigidbody2D _rb;
+    private Animator _animator;
+    private Rigidbody2D _rigidBody;
     private float _moveInput;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -30,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.linearVelocity = new Vector2(_moveInput * _moveSpeed, _rb.linearVelocity.y);
+        _rigidBody.linearVelocity = new Vector2(_moveInput * _moveSpeed, _rigidBody.linearVelocity.y);
     }
 
     private void MoveCheck()
@@ -50,17 +47,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void JumpCheck()
     {
-        if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(_rb.linearVelocity.y) < 0.001f)
+        if (Input.GetKeyDown(KeyCode.W) && Mathf.Abs(_rigidBody.linearVelocity.y) < 0.001f)
         {
-            _rb.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
+            _rigidBody.AddForce(new Vector2(0f, _jumpForce), ForceMode2D.Impulse);
         }
     }
 
     private void FastFallCheck()
     {
-        if (Input.GetKeyDown(KeyCode.S) && Mathf.Abs(_rb.linearVelocity.y) > 0.001f)
+        if (Input.GetKeyDown(KeyCode.S) && Mathf.Abs(_rigidBody.linearVelocity.y) > 0.001f)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -_fastFallSpeed);
+            _rigidBody.linearVelocity = new Vector2(_rigidBody.linearVelocity.x, -_fastFallSpeed);
         }
     }
 
@@ -68,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator.SetFloat("speed", Mathf.Abs(_moveInput));
 
-        bool isGrounded = Mathf.Abs(_rb.linearVelocity.y) < 0.001f;
+        bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < 0.001f;
 
-        _animator.SetFloat("velocityY", _rb.linearVelocity.y);
+        _animator.SetFloat("velocityY", _rigidBody.linearVelocity.y);
     }
 }

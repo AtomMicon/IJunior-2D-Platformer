@@ -1,15 +1,16 @@
 using UnityEngine;
 
+
 public class PlayerInteraction : MonoBehaviour
 {
-
     [SerializeField] private AudioClip _collectSound;
+    [SerializeField] private ScoreUpdater _scoreUpdater;
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out FruitCoin fruitCoin))
         {
-            ScoreUpdater.Instance.AddScore(fruitCoin.ScoreValue);
+            _scoreUpdater.AddScore(fruitCoin.ScoreValue);
 
             if (_collectSound != null)
             {

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8182706384616830945}
   - component: {fileID: 3271113968831402801}
   - component: {fileID: 4519718262454415131}
+  - component: {fileID: 2225136226329536717}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -208,8 +209,6 @@ MonoBehaviour:
   _moveSpeed: 10
   _jumpForce: 12
   _fastFallSpeed: 15
-  _animator: {fileID: 2750103420998914462}
-  _spriteRenderer: {fileID: 6098059384071942776}
 --- !u!114 &3271113968831402801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,10 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9957424f0dd1fec4fb829e9962ef0f35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  _maxHealth: 3
-  _invulnerabilityDuration: 1
-  _blinkInterval: 0.1
-  _knockbackForce: 10
+  _maxValue: 3
   _damageSound: {fileID: 8300000, guid: ff5f85da24bc943d1abdc5760a22bc81, type: 3}
 --- !u!114 &4519718262454415131
 MonoBehaviour:
@@ -240,3 +236,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   _collectSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+  _scoreUpdater: {fileID: 0}
+--- !u!114 &2225136226329536717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027129471225795367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14328bd5addd76439b805c90a3259f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageHandler
+  _knockbackForce: 5
+  _invulnerabilityDuration: 1.5
+  _blinkInterval: 0.1

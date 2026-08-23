@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FruitSpawner
   _fruitPrefabs:
-  - {fileID: 3082496333272499907, guid: fac5e9dcfab7ae04098a1e56e4fc9889, type: 3}
-  - {fileID: 3919669282075312815, guid: 36370cc1482ed884898319aff6bc9b19, type: 3}
-  - {fileID: 2845018643171819276, guid: 66e87b35978594c41ba8ee69d1d03284, type: 3}
-  - {fileID: 6197077913917132449, guid: 7aed0488d917df544aa904bb761ad774, type: 3}
-  - {fileID: 1806191683396597904, guid: 17b74de3ea54e774a8ebc51b018ef53b, type: 3}
-  - {fileID: 3925271606594725759, guid: da385a910c064ca40a86cb9b04d16190, type: 3}
-  - {fileID: 6662807430972419673, guid: 2db959823b266bc46a3b0b132c43788e, type: 3}
-  - {fileID: 4026488704647438688, guid: 961d98634af95fb4584db3b6b695de12, type: 3}
+  - {fileID: 1171126122176439609, guid: fac5e9dcfab7ae04098a1e56e4fc9889, type: 3}
+  - {fileID: 2483177750782008605, guid: 36370cc1482ed884898319aff6bc9b19, type: 3}
+  - {fileID: 740099168124215716, guid: 66e87b35978594c41ba8ee69d1d03284, type: 3}
+  - {fileID: 2700865515848849234, guid: 7aed0488d917df544aa904bb761ad774, type: 3}
+  - {fileID: 636323372710345091, guid: 17b74de3ea54e774a8ebc51b018ef53b, type: 3}
+  - {fileID: 3799211607924314583, guid: da385a910c064ca40a86cb9b04d16190, type: 3}
+  - {fileID: 8057971880810709247, guid: 2db959823b266bc46a3b0b132c43788e, type: 3}
+  - {fileID: 1165314640111932010, guid: 961d98634af95fb4584db3b6b695de12, type: 3}
   _respawnTime: 3

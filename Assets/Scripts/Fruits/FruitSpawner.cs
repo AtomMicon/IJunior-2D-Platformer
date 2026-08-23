@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class FruitSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _fruitPrefabs;
+    [SerializeField] private FruitCoin[] _fruitPrefabs;
     [SerializeField] private float _respawnTime = 3f;
 
-    private GameObject _currentFruit;
+    private FruitCoin _currentFruit;
     private bool _isRespawning;
 
     private void Start()
@@ -31,14 +31,17 @@ public class FruitSpawner : MonoBehaviour
     private IEnumerator RespawnRoutine()
     {
         _isRespawning = true;
+        
         yield return new WaitForSeconds(_respawnTime);
         SpawnFruit();
+        
         _isRespawning = false;
     }
 
     private void SpawnFruit()
     {
-        if (_fruitPrefabs.Length == 0) return;
+        if (_fruitPrefabs.Length == 0) 
+            return;
 
         int randomIndex = Random.Range(0, _fruitPrefabs.Length);
         _currentFruit = Instantiate(_fruitPrefabs[randomIndex], transform.position, Quaternion.identity);
