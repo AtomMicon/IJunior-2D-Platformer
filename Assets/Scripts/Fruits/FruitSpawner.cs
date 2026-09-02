@@ -4,10 +4,14 @@ using UnityEngine;
 public class FruitSpawner : MonoBehaviour
 {
     [SerializeField] private FruitCoin[] _fruitPrefabs;
+    [SerializeField] private FruitCoin _healingFruitPrefab;
+    [SerializeField, Range(0f, 100f)] private float _healSpawnChance = 10f;
     [SerializeField] private float _respawnTime = 3f;
 
     private FruitCoin _currentFruit;
     private bool _isRespawning;
+    private float _spawnChanceMax = 100f;
+    private float _spawnChanceMin = 0f;
 
     private void Start()
     {
@@ -43,7 +47,18 @@ public class FruitSpawner : MonoBehaviour
         if (_fruitPrefabs.Length == 0) 
             return;
 
-        int randomIndex = Random.Range(0, _fruitPrefabs.Length);
-        _currentFruit = Instantiate(_fruitPrefabs[randomIndex], transform.position, Quaternion.identity);
+        FruitCoin prefabToSpawn;
+
+        if (Random.Range(_spawnChanceMin, _spawnChanceMax) <= _healSpawnChance && _healingFruitPrefab != null)
+        {
+            prefabToSpawn = _healingFruitPrefab;
+        }
+        else
+        {
+            int randomIndex = Random.Range(0, _fruitPrefabs.Length);
+            prefabToSpawn = _fruitPrefabs[randomIndex];
+        }
+
+        _currentFruit = Instantiate(prefabToSpawn, transform.position, Quaternion.identity);
     }
 }

@@ -17,6 +17,11 @@ public class PlayerInteraction : MonoBehaviour
                 AudioSource.PlayClipAtPoint(_collectSound, transform.position);
             }
 
+            if(other.TryGetComponent(out HealingFruit healingFruitCoin)) 
+            {
+
+            }
+
             Destroy(fruitCoin.gameObject);
         }
     }
